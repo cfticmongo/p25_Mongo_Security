@@ -79,3 +79,32 @@ Successfully added user: {
 Aunque el usuario se establezca a nivel de base de datos, los datos de este usuario y del resto
 se gestionan de manera centralizada en la colección system.users de la base de datos admin.
 
+3.- Reiniciamos el servidor para levantarlo con autenticación
+
+
+```
+mongod --dbpath <directorio> --auth
+```
+
+O en archivo de configuración .conf:
+
+```
+security:
+    authorization: enabled
+```
+
+4.- Nos conectamos con la shell 
+
+```
+mongo --authenticationDatabase "maraton" -u "maratonAPI" -p 
+```
+
+Con esta conexión, que también podremos logicamente implementar en la URI de las aplicaciones, tendremos acceso solamente
+a la base de datos maraton
+
+```
+show dbs // solo devuelve maraton
+```
+
+Y, de acuerdo al rol asignado, podrá realizar operaciones de escritura y lectura en las colecciones
+de esa base de datos.
